@@ -21,6 +21,28 @@ export default function Room(props) {
       })
     };
 
+    const useFetch = () => {
+      fetch("/api/get-room" + "?code=" + roomCode)
+        .then(res => {
+          if (!res.ok) {
+            window.location.replace('/');
+          }
+          return res.json()
+        })
+        .then(data => {
+          setRoomData({
+            ...roomData, 
+            votesToSkip: data.votes_to_skip,
+            guestCanPause: data.guest_can_pause,
+            isHost: data.is_host,
+          })
+        });
+    }
+
+    useEffect(() => {
+      useFetch();
+    },[roomCode,setRoomData]);
+
     const renderSettings = () => {
       return (
         <Grid container spacing={1}>
@@ -29,8 +51,8 @@ export default function Room(props) {
             update={true} 
             votesToSkip={roomData.votesToSkip}
             guestCanPause={roomData.guestCanPause}
-            roomCode={roomData.roomCode}
-            updateCallback={ ()=> {} }
+            roomCode={roomCode}
+            updateCallBack={useFetch}
             />
           </Grid>
           <Grid item xs={12} align='center'>
@@ -63,23 +85,7 @@ export default function Room(props) {
       });
     };
   
-    useEffect(() => {
-      fetch("/api/get-room" + "?code=" + roomCode)
-        .then(res => {
-          if (!res.ok) {
-            window.location.replace('/');
-          }
-          return res.json()
-        })
-        .then(data => {
-          setRoomData({
-            ...roomData, 
-            votesToSkip: data.votes_to_skip,
-            guestCanPause: data.guest_can_pause,
-            isHost: data.is_host,
-          })
-        })
-    },[roomCode,setRoomData])
+    
     
     
     

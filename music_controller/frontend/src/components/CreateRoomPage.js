@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { TextField, FormHelperText, FormControl, FormControlLabel, Radio, RadioGroup, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { Collapse, Alert } from "@mui/material";
 
 export default class CreateRoomPage extends Component {
     static defaultProps = {
@@ -16,13 +17,18 @@ export default class CreateRoomPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            roomCode: this.props.roomCode,
             guestCanPause: this.props.guestCanPause,
             votesToSkip: this.props.votesToSkip,
+            updateCallBack: this.props.updateCallBack,
+            errorMsg: '',
+            successMsg: '',
         };
 
         this.handleRoomButtonPressed = this.handleRoomButtonPressed.bind(this);
         this.handleVotesChange = this.handleVotesChange.bind(this);
         this.handleGuesCanPauseChange = this.handleGuesCanPauseChange.bind(this);
+        this.handleUpdateButtonPressed = this.handleUpdateButtonPressed.bind(this);
     }
 
     handleVotesChange(e) {
@@ -43,13 +49,12 @@ export default class CreateRoomPage extends Component {
                 <Button 
                 color="primary" 
                 variant="contained" 
-                onClick={this.handleRoomButtonPressed}> 
+                onClick={this.handleUpdateButtonPressed}> 
                     Update a Room
                 </Button>
             </Grid>
-    
         );
-    }
+    };
 
     renderCreateButtons = () => {
         return ( 
@@ -66,7 +71,32 @@ export default class CreateRoomPage extends Component {
                 </Grid>
             </Grid>      
             );
-    }
+    };
+
+    handleUpdateButtonPressed() {
+        const requestOptions = {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                'votes_to_skip': this.state.votesToSkip,
+                'guest_can_pause': this.state.guestCanPause,
+                'code': this.state.roomCode,
+            }),
+        };
+        fetch('/api/update-room', requestOptions)
+        .then((response) => {
+            if (response.ok) {
+                this.setState({
+                    successMsg: 'Room updated successfully!',
+                })
+            } else {
+                this.setState({
+                    errorMsg: 'Error updating room...',
+                })
+            }
+            this.state.updateCallBack();
+        });
+    };
 
     handleRoomButtonPressed() {
         const requestOptions = {
@@ -90,6 +120,25 @@ export default class CreateRoomPage extends Component {
         const title = this.props.update ? "Update Room" : "Create a Room"
         return (
             <Grid container spacing={1}>
+                <Grid item xs={12} align='center'>
+                    <Collapse in={this.state.errorMsg != "" || this.state.successMsg != ''}>
+                        { this.state.successMsg != "" ? 
+                        (<Alert 
+                            severity='success' 
+                            onClose={ () => {this.setState({successMsg: ''}); }}
+                            >
+                            {this.state.successMsg}
+                        </Alert>) 
+                        :
+                        (<Alert 
+                            severity='error' 
+                            onClose={ () => {this.setState({errorMsg: ''}); }}
+                            >
+                            {this.state.errorMsg}
+                        </Alert>) 
+                        }
+                    </Collapse>
+                </Grid>
                 <Grid item xs={12} align="center">
                     <Typography component='h4' variant='h4'>
                         {title}
@@ -100,7 +149,7 @@ export default class CreateRoomPage extends Component {
                         <FormHelperText>
                             Guest Control of Playback State
                         </FormHelperText>
-                        <RadioGroup row defaultValue="true" onChange={this.handleGuesCanPauseChange}>
+                        <RadioGroup row defaultValue={this.props.guestCanPause.toString()} onChange={this.handleGuesCanPauseChange}>
                             <FormControlLabel 
                                 value='true' 
                                 control={<Radio color="primary"/>}
