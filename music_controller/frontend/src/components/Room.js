@@ -10,6 +10,7 @@ export default function Room(props) {
       guestCanPause: false,
       isHost: false,
       showSettings: false,
+      spotifyAuthenticated: false,
     }
     const [roomData, setRoomData] = useState(initialState) 
     const { roomCode } = useParams()
@@ -30,18 +31,51 @@ export default function Room(props) {
           return res.json()
         })
         .then(data => {
+          console.log(data)
           setRoomData({
             ...roomData, 
             votesToSkip: data.votes_to_skip,
             guestCanPause: data.guest_can_pause,
             isHost: data.is_host,
           })
-        });
+          return data.is_host;
+        })
+        .then( (isHost) => {
+          console.log(isHost)
+          if (isHost) {
+            console.log('wchodze isHost')
+            authenticateSpotify();
+          } else {
+            // console.log(roomData.isHost)
+            console.log('nie wchodze host')
+          }
+        })
+        
     }
 
     useEffect(() => {
       useFetch();
     },[roomCode,setRoomData]);
+
+    const authenticateSpotify = () => {
+      console.log('wchodze authenticate')
+      fetch('/spotify/is-authenticated')
+      .then((response) => response.json())
+      .then((data) => {
+        setRoomData({
+          ...roomData,
+          spotifyAuthenticated: data.status
+        });
+
+        if (!data.status) {
+          fetch('/spotify/get-auth-url')
+          .then((response) => response.json())
+          .then((data) => {
+            window.location.replace(data.url)
+          })
+        }
+      })
+    }
 
     const renderSettings = () => {
       return (
