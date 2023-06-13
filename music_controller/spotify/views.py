@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from requests import Request, post
 from rest_framework import status
 from rest_framework.response import Response
-from .utils import update_or_create_user_tokens, is_spotify_authenticated, execute_spotify_api_request
+from .utils import *
 from api.models import Room
 
 class AuthURL(APIView):
@@ -69,8 +69,36 @@ class CurrentSong(APIView):
             return Response({}, status=status.HTTP_404_NOT_FOUND)
         
         host = room.host
-        endpoint = '/player/currently-playing'
+        endpoint = 'player/currently-playing'
         response = execute_spotify_api_request(host, endpoint=endpoint)
         print(response)
 
-        return Response(response, status=status.HTTP_200_OK)
+        if 'error' in response or 'item' in response:
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+        
+        item = response.get('item')
+        duration = item.get('duration_ms')
+        progress = response.get('progress_ms')
+        album_cover = item.get('album').get('images')[0].get('url')
+        is_playing = response.get('is_playing')
+        song_id = item.get('id')
+
+        artists_string = ''
+        for i, artist in enumerate(item.get('artists')):
+            if i > 0:
+                artists_string += ", "
+            name = artist.get('name')
+            artists_string += name
+        
+        song = {
+            'title': item.get('name'),
+            'artist': artists_string,
+            'duration': duration,
+            'time': progress,
+            'image_url': album_cover,
+            'is_playing': is_playing,
+            'votes': 0,
+            'id': song_id
+        }
+
+        return Response(song, status=status.HTTP_200_OK)

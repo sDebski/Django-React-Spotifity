@@ -208,6 +208,8 @@ object-assign
 
 /*! ./ModalManager */
 
+/*! ./MusicPlayer */
+
 /*! ./NotchedOutline */
 
 /*! ./Prefixer.js */
@@ -250,6 +252,10 @@ object-assign
 
 /*! ./buttonGroupClasses */
 
+/*! ./capitalize */
+
+/*! ./cardClasses */
+
 /*! ./chainPropTypes */
 
 /*! ./checkPropTypes */
@@ -274,11 +280,15 @@ object-assign
 
 /*! ./createBreakpoints */
 
+/*! ./createChainedFunction */
+
 /*! ./createMixins */
 
 /*! ./createPalette */
 
 /*! ./createSpacing */
+
+/*! ./createSvgIcon */
 
 /*! ./createTheme */
 
@@ -286,9 +296,13 @@ object-assign
 
 /*! ./createTypography */
 
+/*! ./debounce */
+
 /*! ./defaultSxConfig */
 
 /*! ./defaultTheme */
+
+/*! ./deprecatedPropType */
 
 /*! ./emotion-element-c39617d8.browser.esm.js */
 
@@ -324,9 +338,13 @@ object-assign
 
 /*! ./isHostComponent */
 
+/*! ./isMuiElement */
+
 /*! ./lib/ReactPropTypesSecret */
 
 /*! ./lib/has */
+
+/*! ./linearProgressClasses */
 
 /*! ./listClasses */
 
@@ -348,6 +366,8 @@ object-assign
 
 /*! ./ownerDocument */
 
+/*! ./ownerWindow */
+
 /*! ./paperClasses */
 
 /*! ./popoverClasses */
@@ -355,6 +375,8 @@ object-assign
 /*! ./propsToClassKey */
 
 /*! ./radioClasses */
+
+/*! ./requirePropFactory */
 
 /*! ./resolveComponentProps */
 
@@ -386,7 +408,19 @@ object-assign
 
 /*! ./typographyClasses */
 
+/*! ./unsupportedProp */
+
+/*! ./useControlled */
+
 /*! ./useEnhancedEffect */
+
+/*! ./useEventCallback */
+
+/*! ./useForkRef */
+
+/*! ./useId */
+
+/*! ./useIsFocusVisible */
 
 /*! ./useThemeWithoutDefault */
 
@@ -395,6 +429,8 @@ object-assign
 /*! ./utils/ChildMapping */
 
 /*! ./utils/PropTypes */
+
+/*! ./utils/createSvgIcon */
 
 /*! ./utils/reflow */
 
@@ -409,6 +445,8 @@ object-assign
 /*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */
 
 /*! @babel/runtime/helpers/extends */
+
+/*! @babel/runtime/helpers/interopRequireDefault */
 
 /*! @emotion/cache */
 
@@ -438,15 +476,25 @@ object-assign
 
 /*! @mui/base/Modal */
 
+/*! @mui/base/className */
+
 /*! @mui/base/composeClasses */
 
 /*! @mui/base/utils */
+
+/*! @mui/icons-material/Pause */
+
+/*! @mui/icons-material/PlayArrow */
+
+/*! @mui/icons-material/SkipNext */
 
 /*! @mui/material */
 
 /*! @mui/material/Button */
 
 /*! @mui/material/Grid */
+
+/*! @mui/material/utils */
 
 /*! @mui/styled-engine */
 
@@ -503,6 +551,10 @@ object-assign
 /*!*************************************!*\
   !*** ./node_modules/react/index.js ***!
   \*************************************/
+
+/*!***************************************!*\
+  !*** ./src/components/MusicPlayer.js ***!
+  \***************************************/
 
 /*!****************************************!*\
   !*** ./node_modules/react-is/index.js ***!
@@ -609,6 +661,10 @@ object-assign
   \*************************************************/
 
 /*!*************************************************!*\
+  !*** ./node_modules/@mui/material/Card/Card.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
   !*** ./node_modules/@mui/material/Fade/Fade.js ***!
   \*************************************************/
 
@@ -681,6 +737,10 @@ object-assign
   \**************************************************/
 
 /*!***************************************************!*\
+  !*** ./node_modules/@mui/icons-material/Pause.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
   !*** ./node_modules/@mui/material/Alert/Alert.js ***!
   \***************************************************/
 
@@ -709,6 +769,10 @@ object-assign
   \***************************************************/
 
 /*!***************************************************!*\
+  !*** ./node_modules/@mui/material/utils/index.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
   !*** ./node_modules/@mui/material/utils/useId.js ***!
   \***************************************************/
 
@@ -726,6 +790,10 @@ object-assign
 
 /*!****************************************************!*\
   !*** ./node_modules/@mui/material/colors/green.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/@mui/material/utils/setRef.js ***!
   \****************************************************/
 
 /*!****************************************************!*\
@@ -793,6 +861,10 @@ object-assign
   \******************************************************/
 
 /*!******************************************************!*\
+  !*** ./node_modules/@mui/icons-material/SkipNext.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
   !*** ./node_modules/@mui/material/styles/shadows.js ***!
   \******************************************************/
 
@@ -814,6 +886,10 @@ object-assign
 
 /*!*******************************************************!*\
   !*** ./node_modules/@mui/base/FocusTrap/FocusTrap.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/@mui/icons-material/PlayArrow.js ***!
   \*******************************************************/
 
 /*!*******************************************************!*\
@@ -846,6 +922,10 @@ object-assign
 
 /*!********************************************************!*\
   !*** ./node_modules/@mui/base/utils/mergeSlotProps.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/@mui/material/Card/cardClasses.js ***!
   \********************************************************/
 
 /*!********************************************************!*\
@@ -886,6 +966,10 @@ object-assign
 
 /*!********************************************************!*\
   !*** ./node_modules/@mui/utils/esm/integerPropType.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/@mui/utils/esm/unsupportedProp.js ***!
   \********************************************************/
 
 /*!*********************************************************!*\
@@ -1025,6 +1109,10 @@ object-assign
   \***********************************************************/
 
 /*!***********************************************************!*\
+  !*** ./node_modules/@mui/utils/esm/deprecatedPropType.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
   !*** ./node_modules/@mui/utils/esm/requirePropFactory.js ***!
   \***********************************************************/
 
@@ -1094,6 +1182,10 @@ object-assign
 
 /*!*************************************************************!*\
   !*** ./node_modules/@mui/material/Typography/Typography.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/@mui/material/utils/unsupportedProp.js ***!
   \*************************************************************/
 
 /*!*************************************************************!*\
@@ -1197,6 +1289,10 @@ object-assign
   \****************************************************************/
 
 /*!****************************************************************!*\
+  !*** ./node_modules/@mui/material/utils/deprecatedPropType.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
   !*** ./node_modules/@mui/material/utils/requirePropFactory.js ***!
   \****************************************************************/
 
@@ -1211,6 +1307,10 @@ object-assign
 /*!****************************************************************!*\
   !*** ./node_modules/prop-types/node_modules/react-is/index.js ***!
   \****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/@mui/icons-material/utils/createSvgIcon.js ***!
+  \*****************************************************************/
 
 /*!*****************************************************************!*\
   !*** ./node_modules/@mui/material/GlobalStyles/GlobalStyles.js ***!
@@ -1333,12 +1433,20 @@ object-assign
   \*********************************************************************/
 
 /*!*********************************************************************!*\
+  !*** ./node_modules/@mui/material/LinearProgress/LinearProgress.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
   !*** ./node_modules/@mui/system/esm/useThemeProps/getThemeProps.js ***!
   \*********************************************************************/
 
 /*!*********************************************************************!*\
   !*** ./node_modules/@mui/system/esm/useThemeProps/useThemeProps.js ***!
   \*********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
+  \**********************************************************************/
 
 /*!**********************************************************************!*\
   !*** ./node_modules/@mui/material/ButtonGroup/ButtonGroupContext.js ***!
@@ -1450,6 +1558,10 @@ object-assign
 
 /*!****************************************************************************!*\
   !*** ./node_modules/@mui/material/FormHelperText/formHelperTextClasses.js ***!
+  \****************************************************************************/
+
+/*!****************************************************************************!*\
+  !*** ./node_modules/@mui/material/LinearProgress/linearProgressClasses.js ***!
   \****************************************************************************/
 
 /*!*****************************************************************************!*\
@@ -1581,7 +1693,7 @@ object-assign
  */
 
 /**
- * @remix-run/router v1.6.3
+ * @remix-run/router v1.6.2
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -1606,7 +1718,7 @@ object-assign
  */
 
 /**
- * React Router DOM v6.12.1
+ * React Router DOM v6.11.2
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -1617,7 +1729,7 @@ object-assign
  */
 
 /**
- * React Router v6.12.1
+ * React Router v6.11.2
  *
  * Copyright (c) Remix Software Inc.
  *

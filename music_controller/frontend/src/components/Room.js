@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import { Grid, Typography, Button } from '@mui/material';
 import CreateRoomPage from './CreateRoomPage';
+import MusicPlayer from './MusicPlayer';
 
 
 export default function Room(props) {
@@ -11,6 +12,7 @@ export default function Room(props) {
       isHost: false,
       showSettings: false,
       spotifyAuthenticated: false,
+      song: {},
     }
     const [roomData, setRoomData] = useState(initialState) 
     const { roomCode } = useParams()
@@ -22,7 +24,24 @@ export default function Room(props) {
       })
     };
 
+    const getCurrentSong = () => {
+      fetch('/spotify/current-song').then((response) => {
+        if (!response.ok) {
+          return {};
+        } else {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        setRoomData({
+        ...roomData,
+        song: data });
+        console.log(song)
+      });
+    } 
+
     const useFetch = () => {
+      getCurrentSong();
       fetch("/api/get-room" + "?code=" + roomCode)
         .then(res => {
           if (!res.ok) {
@@ -125,21 +144,7 @@ export default function Room(props) {
             Code: {roomCode}
           </Typography>
         </Grid>
-        <Grid item xs={12} align='center'>
-          <Typography variant="h6" component='h6'>
-            Guest can pause: {roomData.guestCanPause.toString()}
-          </Typography>
-        </Grid>
-        <Grid item xs={12} align='center'>
-          <Typography variant="h6" component='h6'>
-            Votes to skip: {roomData.votesToSkip.toString()}
-          </Typography>
-        </Grid>
-        <Grid item xs={12} align='center'>
-          <Typography variant="h6" component='h6'>
-            Host: {roomData.isHost.toString()}
-          </Typography>
-        </Grid>
+        <MusicPlayer {...roomData.song}/>
         {roomData.isHost ? renderSettingsButton() : null}
         <Grid item xs={12} align='center'>
           <Button color="secondary" variant="contained" onClick={leaveButtonPressed}> 
