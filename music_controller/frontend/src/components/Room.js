@@ -31,31 +31,21 @@ export default function Room(props) {
           return res.json()
         })
         .then(data => {
-          console.log(data)
           setRoomData({
             ...roomData, 
             votesToSkip: data.votes_to_skip,
             guestCanPause: data.guest_can_pause,
             isHost: data.is_host,
           })
-          return data.is_host;
-        })
-        .then( (isHost) => {
-          console.log(isHost)
-          if (isHost) {
-            console.log('wchodze isHost')
-            authenticateSpotify();
-          } else {
-            // console.log(roomData.isHost)
-            console.log('nie wchodze host')
-          }
-        })
-        
+        });
+        if (roomData.isHost) {
+          authenticateSpotify();
+        };
     }
 
     useEffect(() => {
       useFetch();
-    },[roomCode,setRoomData]);
+    },[roomCode, roomData.guestCanPause, roomData.isHost, roomData.votesToSkip]);
 
     const authenticateSpotify = () => {
       console.log('wchodze authenticate')
