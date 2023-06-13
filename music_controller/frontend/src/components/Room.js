@@ -12,11 +12,11 @@ export default function Room(props) {
       isHost: false,
       showSettings: false,
       spotifyAuthenticated: false,
-      song: {title: ''},
       firstTime: true,
     }
     const [roomData, setRoomData] = useState(initialState) 
     const { roomCode } = useParams()
+    const [song, setSong] = useState({title: ''})
 
     const updateShowSetting = (value) => {
       setRoomData({
@@ -36,9 +36,9 @@ export default function Room(props) {
         }
       })
       .then((data) => {
-        setRoomData({
-        ...roomData,
-        song: data });
+        setSong({
+          ...data
+        })
         console.log(data)
       });
     } 
@@ -66,15 +66,11 @@ export default function Room(props) {
         }
         waitSpotify();
         getCurrentSong();
-        console.log()
-        
     }
 
     useEffect(() => {
-      if(firstTime) {
-        useFetch();
-      }
-    },[roomCode, roomData.song.title]);
+      useFetch();
+    },[roomCode, song.title, roomData.isHost]);
 
     const authenticateSpotify = () => {
       console.log('wchodze authenticate')
@@ -154,7 +150,7 @@ export default function Room(props) {
             Code: {roomCode}
           </Typography>
         </Grid>
-        <MusicPlayer {...roomData.song}/>
+        <MusicPlayer {...song}/>
         {roomData.isHost ? renderSettingsButton() : null}
         <Grid item xs={12} align='center'>
           <Button color="secondary" variant="contained" onClick={leaveButtonPressed}> 
