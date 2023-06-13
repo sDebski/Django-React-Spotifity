@@ -25,10 +25,12 @@ export default function Room(props) {
     };
 
     const getCurrentSong = () => {
-      fetch('/spotify/current-song').then((response) => {
+      fetch('/spotify/current-song')
+      .then((response) => {
         if (!response.ok) {
           return {};
         } else {
+          console.log(response);
           return response.json();
         }
       })
@@ -41,7 +43,6 @@ export default function Room(props) {
     } 
 
     const useFetch = () => {
-      getCurrentSong();
       fetch("/api/get-room" + "?code=" + roomCode)
         .then(res => {
           if (!res.ok) {
@@ -57,9 +58,14 @@ export default function Room(props) {
             isHost: data.is_host,
           })
         });
-        if (roomData.isHost) {
+        const waitSpotify = async () => {
+          if (roomData.isHost) {
           authenticateSpotify();
-        };
+          };
+        }
+        waitSpotify();
+        getCurrentSong();
+        
     }
 
     useEffect(() => {
@@ -75,15 +81,15 @@ export default function Room(props) {
           ...roomData,
           spotifyAuthenticated: data.status
         });
-
+        console.log(roomData.spotifyAuthenticated, data.status);
         if (!data.status) {
           fetch('/spotify/get-auth-url')
           .then((response) => response.json())
           .then((data) => {
-            window.location.replace(data.url)
-          })
+            window.location.replace(data.url);
+          });
         }
-      })
+      });
     }
 
     const renderSettings = () => {
