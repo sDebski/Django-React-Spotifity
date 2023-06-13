@@ -12,7 +12,8 @@ export default function Room(props) {
       isHost: false,
       showSettings: false,
       spotifyAuthenticated: false,
-      song: {},
+      song: {title: ''},
+      firstTime: true,
     }
     const [roomData, setRoomData] = useState(initialState) 
     const { roomCode } = useParams()
@@ -38,7 +39,7 @@ export default function Room(props) {
         setRoomData({
         ...roomData,
         song: data });
-        console.log(song)
+        console.log(data)
       });
     } 
 
@@ -65,12 +66,15 @@ export default function Room(props) {
         }
         waitSpotify();
         getCurrentSong();
+        console.log()
         
     }
 
     useEffect(() => {
-      useFetch();
-    },[roomCode, roomData.guestCanPause, roomData.isHost, roomData.votesToSkip]);
+      if(firstTime) {
+        useFetch();
+      }
+    },[roomCode, roomData.song.title]);
 
     const authenticateSpotify = () => {
       console.log('wchodze authenticate')
