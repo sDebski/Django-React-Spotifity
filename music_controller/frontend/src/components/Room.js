@@ -79,7 +79,7 @@ export default function Room(props) {
 
     useEffect(() => {
       useFetch();
-    },[roomCode, song.title, roomData.isHost]);
+    },[roomCode, song.title, roomData.isHost, roomData.spotifyAuthenticated]);
 
     const authenticateSpotify = () => {
       console.log('wchodze authenticate')
