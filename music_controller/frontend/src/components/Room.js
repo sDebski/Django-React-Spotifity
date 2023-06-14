@@ -17,6 +17,7 @@ export default function Room(props) {
     const [roomData, setRoomData] = useState(initialState) 
     const { roomCode } = useParams()
     const [song, setSong] = useState({title: ''})
+    let interval = null;
 
     const updateShowSetting = (value) => {
       setRoomData({
@@ -24,6 +25,15 @@ export default function Room(props) {
         showSettings: value,
       })
     };
+
+    useEffect(() => {
+      if(roomData.spotifyAuthenticated) {
+        interval = setInterval(getCurrentSong, 1000)
+      }
+      return function() {
+        clearInterval(interval)
+      }
+    });
 
     const getCurrentSong = () => {
       fetch('/spotify/current-song')
@@ -65,7 +75,6 @@ export default function Room(props) {
           };
         }
         waitSpotify();
-        getCurrentSong();
     }
 
     useEffect(() => {
