@@ -28,11 +28,11 @@ Host can modify room properties to allow or disallow guests to manage songs.
 ![Host view](https://github.com/sDebski/Django-React-Spotifity/blob/master/images/host_view.png?raw=true)
 ---
 
-### Recent activites
+### Guest view
 ![Guest view](https://github.com/sDebski/Django-React-Spotifity/blob/master/images/guest_view.png?raw=true)
 ---
 
-### Update Room
+### Update Room view
 ![Update-Room view](https://github.com/sDebski/Django-React-Spotifity/blob/master/images/update_view.png?raw=true)
 ---
 
