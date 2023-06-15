@@ -27,9 +27,7 @@ export default function Room(props) {
     };
 
     useEffect(() => {
-      if(roomData.spotifyAuthenticated) {
-        interval = setInterval(getCurrentSong, 1000)
-      }
+      interval = setInterval(getCurrentSong, 1000)
       return function() {
         clearInterval(interval)
       }
@@ -79,7 +77,7 @@ export default function Room(props) {
 
     useEffect(() => {
       useFetch();
-    },[roomCode, song.title, roomData.isHost, roomData.spotifyAuthenticated]);
+    },[roomCode, song.title, roomData.isHost, roomData.guestCanPause, roomData.votesToSkip, roomData.spotifyAuthenticated]);
 
     const authenticateSpotify = () => {
       console.log('wchodze authenticate')

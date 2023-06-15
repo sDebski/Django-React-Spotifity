@@ -39,7 +39,7 @@ import {
       <Grid container spacing={3}>
         <Grid item xs={12} align='center'>
           <Typography variant='h3' component='h3'>
-            House Party
+            Spotifity
           </Typography>
         </Grid>
         <Grid item xs={12} align='center'>
