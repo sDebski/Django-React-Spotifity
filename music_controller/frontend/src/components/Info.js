@@ -18,7 +18,7 @@ export default function Info(props) {
     }
 
     function createInfo() {
-        return 'When you create room you need to login to your spotify account to manage music with your friends from the app.';
+        return 'When you create a room you need to login to your spotify account to manage music with your friends from the app.';
     }
 
 
