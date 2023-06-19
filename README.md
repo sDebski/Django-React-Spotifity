@@ -36,6 +36,16 @@ Host can modify room properties to allow or disallow guests to manage songs.
 ![Update-Room view](https://github.com/sDebski/Django-React-Spotifity/blob/master/images/update_view.png?raw=true)
 ---
 
+### Info create-room view
+![Info-create view](https://github.com/sDebski/Django-React-Spotifity/blob/master/images/info-create.png?raw=true)
+---
+
+### Info join-room view
+![Info-join view](https://github.com/sDebski/Django-React-Spotifity/blob/master/images/Info-join.png?raw=true)
+---
+
+
+
 The app is based on tutorial [Django React App](https://www.youtube.com/playlist?list=PLzMcBGfZo4-kCLWnGmK0jUBmGLaJxvi4j).
 
 
