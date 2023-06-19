@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import RoomJoinPage from "./RoomJoinPage";
 import CreateRoomPage from "./CreateRoomPage";
 import Room from "./Room";
+import Info from "./Info";
 import { Grid, Button, ButtonGroup, Typography, linkClasses } from "@mui/material";
 
 import {
@@ -47,6 +48,9 @@ import {
             <Button color='primary' to='/join' component={Link}>
               Join a Room
             </Button>
+            <Button variant="contained" color='inherit' to='/info' component={Link}>
+              Info
+            </Button>
             <Button color='secondary' to='/create' component={Link}>
               Create a Room
             </Button>
@@ -63,6 +67,7 @@ import {
             <Route exact path="/"
             element={ this.state.roomCode ? (<Navigate to={`/room/${this.state.roomCode}`}/>) : this.renderHomePage() }/>
             <Route path="/join" element={<RoomJoinPage />}/>
+            <Route path='/info' element={<Info />}/>
             <Route path="/create" element={<CreateRoomPage />}/>
             <Route path="/room/:roomCode" element={<Room />}/>
           </Routes>
